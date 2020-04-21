@@ -1,0 +1,5 @@
+name = SEC State Search
+description = Modified elements related to the SEC state search
+backdrop = 1.x
+type = module
+version = 1.x-1.1

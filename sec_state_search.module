@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * SEC State Search module
+ */
+
+ function sec_state_search_init() {
+   backdrop_add_css(backdrop_get_path('module', 'sec_state_search') . '/sec_state_search.css');
+ }
+
+function sec_state_search_form_alter(&$form, &$form_state, $form_id) {
+  // Hide the Tags field on the exposed form on Tags term pages.
+  if ($form['#id'] == 'views-exposed-form-portal-offerings-search-state-taxonomy-filters') {
+    // Check whether the current page is a taxonomy term
+    $term = menu_get_object('taxonomy_term', 2);
+    if ($term->vocabulary == 'states') {
+      // Hide the States term field label
+      // unset($form['#info']['filter-field_organization_state_tid']['label']);
+      // Hide the States term field itself in a way that still passes its value through
+      // $form['field_organization_state_tid']['#type'] = 'hidden';
+      // Set the term field value to the tid of the current page
+      $form['field_organization_state_tid']['#value'] = $term->tid;
+    }
+  }
+}
